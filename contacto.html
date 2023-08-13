@@ -94,17 +94,35 @@ p {
   color: black;
   width: 100%;
 }
+@media screen and (max-width: 860px) {
+            .navbar {
+                justify-content: space-between;
+                padding: 10px;
+            }
+
+            .navbar a {
+                padding: 5px 10px;
+                font-size: 14px;
+            }
+        }
+
+
+
+    </style>
+
+
+
 </style>
 
     </style>
     <div id="hero">
-        <div class="navbar">
-            <a href="/index.html" {% if request.endpoint == 'views.home' %}class="active"{% endif %}>Home</a>
-            <a href="/redes.html" {% if request.endpoint == 'views.about' %}class="active"{% endif %}>Social Networks</a>
-            <a href="/services.html" {% if request.endpoint == 'views.services' %}class="active"{% endif %}>Serviços</a>
-            <a href="/contacto.html" {% if request.endpoint == 'views.contact' %}class="active"{% endif %}>Contacto</a>
-            <a href="/login.html" {% if request.endpoint == 'views.login' %}class="active"{% endif %}>Login</a>
-        </div>
+      <div class="navbar">
+        <a href="/index.html" {% if request.endpoint == 'views.home' %}class="active"{% endif %}>Home</a>
+        <a href="/redes.html" {% if request.endpoint == 'views.about' %}class="active"{% endif %}>Social Networks</a>
+        <a href="/services.html" {% if request.endpoint == 'views.services' %}class="active"{% endif %}>Serviços</a>
+        <a href="/contacto.html" {% if request.endpoint == 'views.contact' %}class="active"{% endif %}>Contacto</a>
+        <a href="/login.html" {% if request.endpoint == 'views.login' %}class="active"{% endif %}>Login</a>
+    </div>
     
       <p></p>
       <p></p>
