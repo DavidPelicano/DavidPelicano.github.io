@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="stylesheet" href="/templates/index.css">
 </head>
 <body>
@@ -99,16 +101,83 @@ p {
                 font-size: 14px;
             }
         }
+/* Container styles */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Button styles */
+.button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* PrevNext button styles */
+.prevNext {
+  margin: 0 10px;
+}
+
+/* Links styles */
+.links {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  background-color: #f2f2f2;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border-radius: 3px;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.link.active {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.link:hover {
+  background-color: #333;
+  color: #fff;
+}
+
 </style>
 <div id="hero">
-    <div class="navbar">
-        <a href="/index.html" {% if request.endpoint == 'views.home' %}class="active"{% endif %}>Home</a>
-        <a href="/redes.html" {% if request.endpoint == 'views.about' %}class="active"{% endif %}>Social Networks</a>
-        <a href="/services.html" {% if request.endpoint == 'views.services' %}class="active"{% endif %}>Serviços</a>
-        <a href="/contacto.html" {% if request.endpoint == 'views.contact' %}class="active"{% endif %}>Contacto</a>
-        <a href="/login.html" {% if request.endpoint == 'views.login' %}class="active"{% endif %}>Login</a>
-    </div>
-
+  <div class="navbar">
+    <a href="/home.html" {% if request.endpoint == 'views.home' %}class="active"{% endif %}>Home</a>
+    <a href="/redes.html" {% if request.endpoint == 'views.about' %}class="active"{% endif %}>Social Networks</a>
+    <a href="/services.html" {% if request.endpoint == 'views.services' %}class="active"{% endif %}>Serviços</a>
+    <a href="/contacto.html" {% if request.endpoint == 'views.contact' %}class="active"{% endif %}>Contacto</a>
+    <a href="/login.html" {% if request.endpoint == 'views.login' %}class="active"{% endif %}>Login</a>
+</div>
+<div class="content">
+  <p>Services!</p> 
+</div>
   <p></p>
   <p></p>
   <br>
@@ -119,19 +188,124 @@ p {
   <br>
   <br>
   <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<br>
+<br>
+
 
 
     
 
 
-      <div class="content">
-        <p>Services!</p> 
+      
+    <br>
+    <br>
+
+    <div class="container">
+      <button class="button" id="startBtn" disabled>
+        <i class="fa-solid fa-angles-left"></i>
+      </button>
+      <button class="button prevNext" id="prev" disabled>
+        <i class="fa-solid fa-angle-left"></i>
+      </button>
+    
+      <div class="links">
+        <a href="/home.html" class="link">1</a>
+        <a href="/redes.html" class="link">2</a>
+        <a href="/services.html" class="link active">3</a>
+        <a href="/contacto.html" class="link">4</a>
+        <a href="/login.html" class="link">5</a>
+        <a href="/register.html" class="link">6</a>
+      </div>
+    
+      <button class="button prevNext" id="next">
+        <i class="fa-solid fa-angle-right"></i>
+      </button>
+      <button class="button" id="endBtn">
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
     </div>
     
-      <!-- Scripts JavaScript (opcional) -->
-      <script>
-        // Se desejar adicionar funcionalidades usando JavaScript
-      </script>
+    <script>
+      const links = document.querySelectorAll('.link');
+      const prevBtn = document.querySelector('#prev');
+      const nextBtn = document.querySelector('#next');
+      const startBtn = document.querySelector('#startBtn');
+      const endBtn = document.querySelector('#endBtn');
+      
+      let currentStep = 2;
+    
+      links.forEach((link, index) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          currentStep = index;
+          updateButtons();
+          navigateToLink(link.href); // Navigate to the clicked link
+        });
+      });
+    
+      prevBtn.addEventListener('click', () => {
+        currentStep = Math.max(currentStep - 1, 0);
+        updateButtons();
+        navigateToLink(links[currentStep].href); // Navigate to the previous link
+      });
+    
+      nextBtn.addEventListener('click', () => {
+        currentStep = Math.min(currentStep + 1, links.length - 1);
+        updateButtons();
+        navigateToLink(links[currentStep].href); // Navigate to the next link
+      });
+    
+      startBtn.addEventListener('click', () => {
+        currentStep = 0;
+        updateButtons();
+        navigateToLink(links[currentStep].href); // Navigate to the first link
+      });
+    
+      endBtn.addEventListener('click', () => {
+        currentStep = links.length - 1;
+        updateButtons();
+        navigateToLink(links[currentStep].href); // Navigate to the last link
+      });
+    
+      function updateButtons() {
+        links.forEach((link, index) => {
+          link.classList.toggle('active', index === currentStep);
+        });
+    
+        prevBtn.disabled = currentStep === 0;
+        startBtn.disabled = currentStep === 0;
+        nextBtn.disabled = currentStep === links.length - 1;
+        endBtn.disabled = currentStep === links.length - 1;
+      }
+    
+      function navigateToLink(url) {
+        window.location.href = url;
+      }
+    
+      updateButtons();
+    </script>
+    
 </body>
 </html>
 
